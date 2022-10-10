@@ -1,20 +1,21 @@
 const express = require('express');
-const models = require('./models');
+const models = require('./server/models');
 const {graphqlHTTP} = require('express-graphql');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const passportConfig = require('./services/auth');
+const passportConfig = require('./server/services/auth');
 const MongoStore = require('connect-mongo');
-const schema = require('./schema/schema');
+const schema = require('./server/schema/schema');
 const cors = require('cors')
+require('dotenv').config()
 
 // Create a new Express application
 const app = express();
 
 
 app.use(cors({
-  origin:FRONTEND_ORIGIN,
+  origin:process.env.FRONTEND_ORIGIN,
   credentials:true
 }))
 // Replace with your mongoLab URI
