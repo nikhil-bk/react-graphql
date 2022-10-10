@@ -14,11 +14,11 @@ const app = express();
 
 
 app.use(cors({
-  origin:"http://localhost:3000",
+  origin:FRONTEND_ORIGIN,
   credentials:true
 }))
 // Replace with your mongoLab URI
-const MONGO_URI = "mongodb+srv://Nikhilbk9148:ajcp6YgQAYnl3SoV@cluster0.yognvig.mongodb.net/?retryWrites=true&w=majority"
+const MONGO_URI = process.env.MONGO_URL
 if (!MONGO_URI) {
   throw new Error('You must provide a MongoLab URI');
 }
@@ -62,6 +62,6 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-app.listen(4000, () => {
+app.listen(process.env.PORT, () => {
   console.log('Listening');
 });
