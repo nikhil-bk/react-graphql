@@ -43,6 +43,7 @@ const mutation = new GraphQLObjectType({
             },
             resolve(parentValue,{email,password},req){
                 console.log("-----Login connect attempted-----")
+                console.log(AuthService.login({email,password,req}))
                 return AuthService.login({email,password,req})
             }
         },
