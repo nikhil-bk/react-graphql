@@ -61,8 +61,11 @@ app.use(passport.session());
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true
-}));
+}))
+app.get("/",(req,res)=>{
+  res.send("Welcome to GRAPHQL route over to /graphql")
+})
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT||4000, () => {
   console.log('Listening');
 });
