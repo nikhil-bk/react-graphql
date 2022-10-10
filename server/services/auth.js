@@ -71,10 +71,10 @@ function signup({ email, password, req }) {
 // Express.  We have another compatibility layer here to make it work nicely with
 // GraphQL, as GraphQL always expects to see a promise for handling async code.
 async function login({ email, password, req }) {
-  return await new Promise((resolve, reject) => {
+  return  new Promise((resolve, reject) => {
     passport.authenticate('local', (err, user) => {
       if (!user) { reject('Invalid credentials.') }
-console.log(user)
+        console.log(user)
       req.login(user, () => resolve(user));
     })({ body: { email, password } });
   });
