@@ -18,7 +18,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parentValue, args, req) {
         console.log("-----Requesting user---------")
         console.log(req._passport.session.user)
-        return req.user
+        return req._passport.session.user
       }
     },
     songs: {
