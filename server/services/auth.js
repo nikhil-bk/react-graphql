@@ -7,13 +7,13 @@ const User = mongoose.model('user');
 // SerializeUser is used to provide some identifying token that can be saved
 // in the users session.  We traditionally use the 'ID' for this.
 passport.serializeUser((user, done) => {
-  done(null, user._id);
+  done(null, user.id);
 });
 
 // The counterpart of 'serializeUser'.  Given only a user's ID, we must return
 // the user object.  This object is placed on 'req.user'.
-passport.deserializeUser((_id, done) => {
-  User.findById(_id, (err, user) => {
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
     if(err){
       done(null, false, {error:err});
     }
@@ -77,7 +77,7 @@ function signup({ email, password, req }) {
 // GraphQL, as GraphQL always expects to see a promise for handling async code.
 async function login({ email, password, req }) {
   return  new Promise((resolve, reject) => {
-    passport.authenticate('local',{session:true}, (err, user) => {
+    passport.authenticate('local', (err, user) => {
       if (!user) { reject('Invalid credentials.') }
         console.log(user)
       req.login(user, () => resolve(user));

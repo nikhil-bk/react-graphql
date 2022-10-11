@@ -19,8 +19,7 @@ app.use(cors({
   origin:process.env.FRONTEND_ORIGIN,
   credentials:true
 }))
-// app.use(express.cookieParser())
-// app.use(express.bodyParser());
+
 // Replace with your mongoLab URI
 const MONGO_URI = process.env.MONGO_URL
 if (!MONGO_URI) {
