@@ -7,14 +7,19 @@ const User = mongoose.model('user');
 // SerializeUser is used to provide some identifying token that can be saved
 // in the users session.  We traditionally use the 'ID' for this.
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user._id);
 });
 
 // The counterpart of 'serializeUser'.  Given only a user's ID, we must return
 // the user object.  This object is placed on 'req.user'.
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
+passport.deserializeUser((_id, done) => {
+  User.findById(_id, (err, user) => {
+    if(err){
+      done(null, false, {error:err});
+    }
+    else {
+      done(null, user);
+  }
   });
 });
 

@@ -17,7 +17,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       resolve(parentValue, args, req) {
         console.log("-----Requesting user---------")
-        console.log(req)
+        console.log(req._passport.session.user)
         return req.user
       }
     },

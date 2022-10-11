@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser=require("body-parser")
 const models = require('./server/models');
 const {graphqlHTTP} = require('express-graphql');
 const mongoose = require('mongoose');
@@ -18,6 +19,8 @@ app.use(cors({
   origin:process.env.FRONTEND_ORIGIN,
   credentials:true
 }))
+app.use(express.cookieParser())
+app.use(express.bodyParser());
 // Replace with your mongoLab URI
 const MONGO_URI = process.env.MONGO_URL
 if (!MONGO_URI) {
@@ -46,7 +49,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: 'aaabbbccc',
-  cookie:{sameSite:"none"},
+
   store: MongoStore.create({ mongoUrl: MONGO_URI })
 }));
 
@@ -63,9 +66,9 @@ app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true
 }))
-app.get("/",(req,res)=>{
-  res.send("Welcome to GRAPHQL route over to /graphql")
-})
+// app.get("/",(req,res)=>{
+//   res.send("Welcome to GRAPHQL route over to /graphql")
+// })
 
 app.listen(process.env.PORT||4000, () => {
   console.log('Listening');
