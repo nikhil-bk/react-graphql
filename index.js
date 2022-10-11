@@ -46,6 +46,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: 'aaabbbccc',
+  cookie:{sameSite:"none"},
   store: MongoStore.create({ mongoUrl: MONGO_URI })
 }));
 
