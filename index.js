@@ -21,7 +21,7 @@ app.use(cors({
 }))
 
 // Replace with your mongoLab URI
-const MONGO_URI = process.env.MONGO_URL
+const MONGO_URI = process.env.MONGO_URL_DB
 if (!MONGO_URI) {
   throw new Error('You must provide a MongoLab URI');
 }
