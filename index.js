@@ -16,7 +16,7 @@ const app = express();
 
 
 app.use(cors({
-  origin:process.env.FRONTEND_ORIGIN,
+  origin:process.env.FRONTEND_ORIGIN_VERCEL,
   credentials:true
 }))
 
